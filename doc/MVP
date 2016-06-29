@@ -1,0 +1,5 @@
+MVP:
+1.把公有的抽象方法放到base，baseactivity
+2.将业务逻辑查分出来放到impl结尾的类中
+3.将布局中的某些数据 通过databinding 绑定 访问控件通过databinding
+4.将对控件的复杂操作拿出来放到view里

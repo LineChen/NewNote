@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardView"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:clickable="true"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="2dp">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/note_ripple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleColor="?attr/colorPrimary">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <!-- this.categoryId = 1;
+		this.title = "";
+		this.content = "";
+		this.lastEditTime = 0;
+		this.audioPath = "";
+		this.videoPath = "";
+		this.localtionX = 0;
+		this.localtionY = 0;
+		this.localtionName = "";-->
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="日常"
+                android:singleLine="true"
+                android:textColor="@color/black_31"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="内容"
+                android:maxLines="2"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/content_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                >
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/photo"/>
+                <ImageView
+                    android:id="@+id/camera"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/camera"/>
+                <ImageView
+                    android:id="@+id/video_camera"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/video_camera"/>
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    android:src="@mipmap/location"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+</android.support.v7.widget.CardView>

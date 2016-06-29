@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+def packTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.bocai.newnote"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        resConfigs "zh"
+    }
+    buildTypes {
+        release {
+            zipAlignEnabled true
+            minifyEnabled false
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    productFlavors {
+//        _fir{}
+//        _mumayi{}
+        _wandoujia {}
+//        _xiaomi{}
+//        _yingyongbao{}
+//        _360{}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                File outputDirectory = new File(outputFile.parent);
+                def fileName
+                if (variant.buildType.name == "release") {
+                    fileName = "new_note_v${defaultConfig.versionName}_${packTime()}_${variant.productFlavors[0].name}.apk"
+                } else {
+                    fileName = "new_note_beta.apk"
+                }
+                output.outputFile = new File(outputDirectory, fileName)
+            }
+        }
+
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':prefrencelibrary')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.umeng:fb:5.4.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'io.realm:realm-android:0.87.0'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
+    compile 'cn.bmob.android:bmob-sdk:3.4.7'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okio:okio:1.7.0'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
+}
